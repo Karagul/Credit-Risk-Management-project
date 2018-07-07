@@ -1,0 +1,512 @@
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2,p_gofc_100_2[[i]])
+for (i in 1:len) accp[i] <- cp(n,points[i],acL,acU,p_gofc_100_2[[i]])
+for (i in 1:len) acel[i] <- el(n,points[i],acL,acU,p_gofc_100_2[[i]])
+for (i in 1:len) ac2cp[i] <- cp(n,points[i],acL2,acU2,p_gofc_100_2[[i]])
+for (i in 1:len) ac2el[i] <- el(n,points[i],acL2,acU2,p_gofc_100_2[[i]])
+for (i in 1:len) scp[i] <- cp(n,points[i],scoreL,scoreU,p_gofc_100_2[[i]])
+for (i in 1:len) sel[i] <- el(n,points[i],scoreL,scoreU,p_gofc_100_2[[i]])
+for (i in 1:len) s2cp[i] <- cp(n,points[i],scoreL2,scoreU2,p_gofc_100_2[[i]])
+for (i in 1:len) s2el[i] <- el(n,points[i],scoreL2,scoreU2,p_gofc_100_2[[i]])
+for (i in 1:len) mscp[i] <- cp(n,points[i],msL,msU,p_gofc_100_2[[i]])
+for (i in 1:len) msel[i] <- el(n,points[i],msL,msU,p_gofc_100_2[[i]])
+for (i in 1:len) mjcp[i] <- cp(n,points[i],mjL,mjU,p_gofc_100_2[[i]])
+for (i in 1:len) mjel[i] <- el(n,points[i],mjL,mjU,p_gofc_100_2[[i]])
+for (i in 1:len) zlcp[i] <- cp(n,points[i],zlL,zlU,p_gofc_100_2[[i]])
+for (i in 1:len) zlel[i] <- el(n,points[i],zlL,zlU,p_gofc_100_2[[i]])
+for (i in 1:len) zl2cp[i] <- cp(n,points[i],zlL2,zlU2,p_gofc_100_2[[i]])
+for (i in 1:len) zl2el[i] <- el(n,points[i],zlL2,zlU2,p_gofc_100_2[[i]])
+for (i in 1:len) jeffcp[i] <- cp(n,points[i],jeffL,jeffU,p_gofc_100_2[[i]])
+for (i in 1:len) jeffel[i] <- el(n,points[i],jeffL,jeffU,p_gofc_100_2[[i]])
+for (i in 1:len) exactcp[i] <- cp(n,points[i],exactL,exactU,p_gofc_100_2[[i]])
+for (i in 1:len) exactel[i] <- el(n,points[i],exactL,exactU,p_gofc_100_2[[i]])
+n100cloppercp2 <- cloppercp
+n100clopperel2 <- clopperel
+n100wcp2 <- wcp
+n100wel2 <- wel
+n100w2cp2 <- w2cp
+n100w2el2 <- w2el
+n100accp2 <- accp
+n100acel2 <- acel
+n100ac2cp2 <- ac2cp
+n100ac2el2 <- ac2el
+n100scp2 <- scp
+n100sel2 <- sel
+n100s2cp2 <- s2cp
+n100s2el2 <- s2el
+n100mscp2 <- mscp
+n100msel2 <- msel
+n100zlcp2 <- zlcp
+n100zlel2 <- zlel
+n100zl2cp2 <- zl2cp
+n100zl2el2 <- zl2el
+n100jeffcp2 <- jeffcp
+n100jeffel2 <- jeffel
+n100mjcp2 <- mjcp
+n100mjel2 <- mjel
+n100jeffcp2 <- jeffcp
+n100jeffel2 <-  jeffel
+n100exactcp2 <- exactcp
+n100exactel2 <- exactel
+a <- .1
+clopper_temp <- clopper_gofc(n, .5)
+clopperL <- clopper_temp[1:(n+1)]
+clopperU <- clopper_temp[(n+2):(2*n+2)]
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+ac_temp <- ac_gofc(n, .5)
+acL <- ac_temp[1:(n+1)]
+acU <- ac_temp[(n+2):(2*n+2)]
+acL2 <- ac_temp[(2*n+3):(3*n+3)]
+acU2 <- ac_temp[(3*n+4):(4*n+4)]
+score_temp <- score_gofc(n, .5)
+scoreL <- score_temp[1:(n+1)]
+scoreU <- score_temp[(n+2):(2*n+2)]
+scoreL2 <- score_temp[(2*n+3):(3*n+3)]
+scoreU2 <- score_temp[(3*n+4):(4*n+4)]
+jeff_temp <- jeff_gofc(n, .5)
+jeffL <- jeff_temp[1:(n+1)]
+jeffU <- jeff_temp[(n+2):(2*n+2)]
+ms_temp <- mod_score_gofc(n, .5)
+msL <- ms_temp[1:(n+1)]
+msU <- ms_temp[(n+2):(2*n+2)]
+mj_temp <- mod_jeff_gofc(n, .5)
+mjL <- mj_temp[1:(n+1)]
+mjU <- mj_temp[(n+2):(2*n+2)]
+zl_temp <- zl_gofc(n, .5)
+zlL <- zl_temp[1:(n+1)]
+zlU <- zl_temp[(n+2):(2*n+2)]
+zlL2 <- zl_temp[(2*n+3):(3*n+3)]
+zlU2 <- zl_temp[(3*n+4):(4*n+4)]
+exact_temp <- exact_gofc(n, .5)
+exactL <- exact_temp[1:(n+1)]
+exactU <- exact_temp[(n+2):(2*n+2)]
+for (i in 1:len) cloppercp[i] <- cp(n,points[i],clopperL,clopperU,p_gofc_100_1[[i]])
+for (i in 1:len) clopperel[i] <- el(n,points[i],clopperL,clopperU,p_gofc_100_1[[i]])
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU,p_gofc_100_1[[i]])
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU,p_gofc_100_1[[i]])
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2,p_gofc_100_1[[i]])
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2,p_gofc_100_1[[i]])
+for (i in 1:len) accp[i] <- cp(n,points[i],acL,acU,p_gofc_100_1[[i]])
+for (i in 1:len) acel[i] <- el(n,points[i],acL,acU,p_gofc_100_1[[i]])
+for (i in 1:len) ac2cp[i] <- cp(n,points[i],acL2,acU2,p_gofc_100_1[[i]])
+for (i in 1:len) ac2el[i] <- el(n,points[i],acL2,acU2,p_gofc_100_1[[i]])
+for (i in 1:len) scp[i] <- cp(n,points[i],scoreL,scoreU,p_gofc_100_1[[i]])
+for (i in 1:len) sel[i] <- el(n,points[i],scoreL,scoreU,p_gofc_100_1[[i]])
+for (i in 1:len) s2cp[i] <- cp(n,points[i],scoreL2,scoreU2,p_gofc_100_1[[i]])
+for (i in 1:len) s2el[i] <- el(n,points[i],scoreL2,scoreU2,p_gofc_100_1[[i]])
+for (i in 1:len) mscp[i] <- cp(n,points[i],msL,msU,p_gofc_100_1[[i]])
+for (i in 1:len) msel[i] <- el(n,points[i],msL,msU,p_gofc_100_1[[i]])
+for (i in 1:len) mjcp[i] <- cp(n,points[i],mjL,mjU,p_gofc_100_1[[i]])
+for (i in 1:len) mjel[i] <- el(n,points[i],mjL,mjU,p_gofc_100_1[[i]])
+for (i in 1:len) zlcp[i] <- cp(n,points[i],zlL,zlU,p_gofc_100_1[[i]])
+for (i in 1:len) zlel[i] <- el(n,points[i],zlL,zlU,p_gofc_100_1[[i]])
+for (i in 1:len) zl2cp[i] <- cp(n,points[i],zlL2,zlU2,p_gofc_100_1[[i]])
+for (i in 1:len) zl2el[i] <- el(n,points[i],zlL2,zlU2,p_gofc_100_1[[i]])
+for (i in 1:len) jeffcp[i] <- cp(n,points[i],jeffL,jeffU,p_gofc_100_1[[i]])
+for (i in 1:len) jeffel[i] <- el(n,points[i],jeffL,jeffU,p_gofc_100_1[[i]])
+for (i in 1:len) exactcp[i] <- cp(n,points[i],exactL,exactU,p_gofc_100_1[[i]])
+for (i in 1:len) exactel[i] <- el(n,points[i],exactL,exactU,p_gofc_100_1[[i]])
+n100cloppercp1 <- cloppercp
+n100clopperel1 <- clopperel
+n100wcp1 <- wcp
+n100wel1 <- wel
+n100w2cp1 <- w2cp
+n100w2el1 <- w2el
+n100accp1 <- accp
+n100acel1 <- acel
+n100ac2cp1 <- ac2cp
+n100ac2el1 <- ac2el
+n100scp1 <- scp
+n100sel1 <- sel
+n100s2cp1 <- s2cp
+n100s2el1 <- s2el
+n100mscp1 <- mscp
+n100msel1 <- msel
+n100zlcp1 <- zlcp
+n100zlel1 <- zlel
+n100zl2cp1 <- zl2cp
+n100zl2el1 <- zl2el
+n100jeffcp1 <- jeffcp
+n100jeffel1 <- jeffel
+n100mjcp1 <- mjcp
+n100mjel1 <- mjel
+n100jeffcp1 <- jeffcp
+n100jeffel1 <-  jeffel
+n100exactcp1 <- exactcp
+n100exactel1 <- exactel
+n <- 200
+clopper_temp <- clopper_gofc(n, .5)
+clopperL <- clopper_temp[1:(n+1)]
+clopperU <- clopper_temp[(n+2):(2*n+2)]
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+ac_temp <- ac_gofc(n, .5)
+acL <- ac_temp[1:(n+1)]
+acU <- ac_temp[(n+2):(2*n+2)]
+acL2 <- ac_temp[(2*n+3):(3*n+3)]
+acU2 <- ac_temp[(3*n+4):(4*n+4)]
+score_temp <- score_gofc(n, .5)
+scoreL <- score_temp[1:(n+1)]
+scoreU <- score_temp[(n+2):(2*n+2)]
+scoreL2 <- score_temp[(2*n+3):(3*n+3)]
+scoreU2 <- score_temp[(3*n+4):(4*n+4)]
+jeff_temp <- jeff_gofc(n, .5)
+jeffL <- jeff_temp[1:(n+1)]
+jeffU <- jeff_temp[(n+2):(2*n+2)]
+ms_temp <- mod_score_gofc(n, .5)
+msL <- ms_temp[1:(n+1)]
+msU <- ms_temp[(n+2):(2*n+2)]
+mj_temp <- mod_jeff_gofc(n, .5)
+mjL <- mj_temp[1:(n+1)]
+mjU <- mj_temp[(n+2):(2*n+2)]
+zl_temp <- zl_gofc(n, .5)
+zlL <- zl_temp[1:(n+1)]
+zlU <- zl_temp[(n+2):(2*n+2)]
+zlL2 <- zl_temp[(2*n+3):(3*n+3)]
+zlU2 <- zl_temp[(3*n+4):(4*n+4)]
+exact_temp <- exact_gofc(n, .5)
+exactL <- exact_temp[1:(n+1)]
+exactU <- exact_temp[(n+2):(2*n+2)]
+for (i in 1:len) cloppercp[i] <- cp(n,points[i],clopperL,clopperU,p_gofc_200_1[[i]])
+for (i in 1:len) clopperel[i] <- el(n,points[i],clopperL,clopperU,p_gofc_200_1[[i]])
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU,p_gofc_200_1[[i]])
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU,p_gofc_200_1[[i]])
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2,p_gofc_200_1[[i]])
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2,p_gofc_200_1[[i]])
+for (i in 1:len) accp[i] <- cp(n,points[i],acL,acU,p_gofc_200_1[[i]])
+for (i in 1:len) acel[i] <- el(n,points[i],acL,acU,p_gofc_200_1[[i]])
+for (i in 1:len) ac2cp[i] <- cp(n,points[i],acL2,acU2,p_gofc_200_1[[i]])
+for (i in 1:len) ac2el[i] <- el(n,points[i],acL2,acU2,p_gofc_200_1[[i]])
+for (i in 1:len) scp[i] <- cp(n,points[i],scoreL,scoreU,p_gofc_200_1[[i]])
+for (i in 1:len) sel[i] <- el(n,points[i],scoreL,scoreU,p_gofc_200_1[[i]])
+for (i in 1:len) s2cp[i] <- cp(n,points[i],scoreL2,scoreU2,p_gofc_200_1[[i]])
+for (i in 1:len) s2el[i] <- el(n,points[i],scoreL2,scoreU2,p_gofc_200_1[[i]])
+for (i in 1:len) mscp[i] <- cp(n,points[i],msL,msU,p_gofc_200_1[[i]])
+for (i in 1:len) msel[i] <- el(n,points[i],msL,msU,p_gofc_200_1[[i]])
+for (i in 1:len) mjcp[i] <- cp(n,points[i],mjL,mjU,p_gofc_200_1[[i]])
+for (i in 1:len) mjel[i] <- el(n,points[i],mjL,mjU,p_gofc_200_1[[i]])
+for (i in 1:len) zlcp[i] <- cp(n,points[i],zlL,zlU,p_gofc_200_1[[i]])
+for (i in 1:len) zlel[i] <- el(n,points[i],zlL,zlU,p_gofc_200_1[[i]])
+for (i in 1:len) zl2cp[i] <- cp(n,points[i],zlL2,zlU2,p_gofc_200_1[[i]])
+for (i in 1:len) zl2el[i] <- el(n,points[i],zlL2,zlU2,p_gofc_200_1[[i]])
+for (i in 1:len) jeffcp[i] <- cp(n,points[i],jeffL,jeffU,p_gofc_200_1[[i]])
+for (i in 1:len) jeffel[i] <- el(n,points[i],jeffL,jeffU,p_gofc_200_1[[i]])
+for (i in 1:len) exactcp[i] <- cp(n,points[i],exactL,exactU,p_gofc_200_1[[i]])
+for (i in 1:len) exactel[i] <- el(n,points[i],exactL,exactU,p_gofc_200_1[[i]])
+n200cloppercp1 <- cloppercp
+n200clopperel1 <- clopperel
+n200wcp1 <- wcp
+n200wel1 <- wel
+n200w2cp1 <- w2cp
+n200w2el1 <- w2el
+n200accp1 <- accp
+n200acel1 <- acel
+n200ac2cp1 <- ac2cp
+n200ac2el1 <- ac2el
+n200scp1 <- scp
+n200sel1 <- sel
+n200s2cp1 <- s2cp
+n200s2el1 <- s2el
+n200mscp1 <- mscp
+n200msel1 <- msel
+n200zlcp1 <- zlcp
+n200zlel1 <- zlel
+n200zl2cp1 <- zl2cp
+n200zl2el1 <- zl2el
+n200jeffcp1 <- jeffcp
+n200jeffel1 <- jeffel
+n200mjcp1 <- mjcp
+n200mjel1 <- mjel
+n200jeffcp1 <- jeffcp
+n200jeffel1 <-  jeffel
+n200exactcp1 <- exactcp
+n200exactel1 <- exactel
+a <- .2
+clopper_temp <- clopper_gofc(n, .5)
+clopperL <- clopper_temp[1:(n+1)]
+clopperU <- clopper_temp[(n+2):(2*n+2)]
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+ac_temp <- ac_gofc(n, .5)
+acL <- ac_temp[1:(n+1)]
+acU <- ac_temp[(n+2):(2*n+2)]
+acL2 <- ac_temp[(2*n+3):(3*n+3)]
+acU2 <- ac_temp[(3*n+4):(4*n+4)]
+score_temp <- score_gofc(n, .5)
+scoreL <- score_temp[1:(n+1)]
+scoreU <- score_temp[(n+2):(2*n+2)]
+scoreL2 <- score_temp[(2*n+3):(3*n+3)]
+scoreU2 <- score_temp[(3*n+4):(4*n+4)]
+jeff_temp <- jeff_gofc(n, .5)
+jeffL <- jeff_temp[1:(n+1)]
+jeffU <- jeff_temp[(n+2):(2*n+2)]
+ms_temp <- mod_score_gofc(n, .5)
+msL <- ms_temp[1:(n+1)]
+msU <- ms_temp[(n+2):(2*n+2)]
+mj_temp <- mod_jeff_gofc(n, .5)
+mjL <- mj_temp[1:(n+1)]
+mjU <- mj_temp[(n+2):(2*n+2)]
+zl_temp <- zl_gofc(n, .5)
+zlL <- zl_temp[1:(n+1)]
+zlU <- zl_temp[(n+2):(2*n+2)]
+zlL2 <- zl_temp[(2*n+3):(3*n+3)]
+zlU2 <- zl_temp[(3*n+4):(4*n+4)]
+exact_temp <- exact_gofc(n, .5)
+exactL <- exact_temp[1:(n+1)]
+exactU <- exact_temp[(n+2):(2*n+2)]
+for (i in 1:len) cloppercp[i] <- cp(n,points[i],clopperL,clopperU,p_gofc_200_2[[i]])
+for (i in 1:len) clopperel[i] <- el(n,points[i],clopperL,clopperU,p_gofc_200_2[[i]])
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU,p_gofc_200_2[[i]])
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU,p_gofc_200_2[[i]])
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2,p_gofc_200_2[[i]])
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2,p_gofc_200_2[[i]])
+for (i in 1:len) accp[i] <- cp(n,points[i],acL,acU,p_gofc_200_2[[i]])
+for (i in 1:len) acel[i] <- el(n,points[i],acL,acU,p_gofc_200_2[[i]])
+for (i in 1:len) ac2cp[i] <- cp(n,points[i],acL2,acU2,p_gofc_200_2[[i]])
+for (i in 1:len) ac2el[i] <- el(n,points[i],acL2,acU2,p_gofc_200_2[[i]])
+for (i in 1:len) scp[i] <- cp(n,points[i],scoreL,scoreU,p_gofc_200_2[[i]])
+for (i in 1:len) sel[i] <- el(n,points[i],scoreL,scoreU,p_gofc_200_2[[i]])
+for (i in 1:len) s2cp[i] <- cp(n,points[i],scoreL2,scoreU2,p_gofc_200_2[[i]])
+for (i in 1:len) s2el[i] <- el(n,points[i],scoreL2,scoreU2,p_gofc_200_2[[i]])
+for (i in 1:len) mscp[i] <- cp(n,points[i],msL,msU,p_gofc_200_2[[i]])
+for (i in 1:len) msel[i] <- el(n,points[i],msL,msU,p_gofc_200_2[[i]])
+for (i in 1:len) mjcp[i] <- cp(n,points[i],mjL,mjU,p_gofc_200_2[[i]])
+for (i in 1:len) mjel[i] <- el(n,points[i],mjL,mjU,p_gofc_200_2[[i]])
+for (i in 1:len) zlcp[i] <- cp(n,points[i],zlL,zlU,p_gofc_200_2[[i]])
+for (i in 1:len) zlel[i] <- el(n,points[i],zlL,zlU,p_gofc_200_2[[i]])
+for (i in 1:len) zl2cp[i] <- cp(n,points[i],zlL2,zlU2,p_gofc_200_2[[i]])
+for (i in 1:len) zl2el[i] <- el(n,points[i],zlL2,zlU2,p_gofc_200_2[[i]])
+for (i in 1:len) jeffcp[i] <- cp(n,points[i],jeffL,jeffU,p_gofc_200_2[[i]])
+for (i in 1:len) jeffel[i] <- el(n,points[i],jeffL,jeffU,p_gofc_200_2[[i]])
+for (i in 1:len) exactcp[i] <- cp(n,points[i],exactL,exactU,p_gofc_200_2[[i]])
+for (i in 1:len) exactel[i] <- el(n,points[i],exactL,exactU,p_gofc_200_2[[i]])
+n200cloppercp2 <- cloppercp
+n200clopperel2 <- clopperel
+n200wcp2 <- wcp
+n200wel2 <- wel
+n200w2cp2 <- w2cp
+n200w2el2 <- w2el
+n200accp2 <- accp
+n200acel2 <- acel
+n200ac2cp2 <- ac2cp
+n200ac2el2 <- ac2el
+n200scp2 <- scp
+n200sel2 <- sel
+n200s2cp2 <- s2cp
+n200s2el2 <- s2el
+n200mscp2 <- mscp
+n200msel2 <- msel
+n200zlcp2 <- zlcp
+n200zlel2 <- zlel
+n200zl2cp2 <- zl2cp
+n200zl2el2 <- zl2el
+n200jeffcp2 <- jeffcp
+n200jeffel2 <- jeffel
+n200mjcp2 <- mjcp
+n200mjel2 <- mjel
+n200jeffcp2 <- jeffcp
+n200jeffel2 <-  jeffel
+n200exactcp2 <- exactcp
+n200exactel2 <- exactel
+clopper_temp <- clopper_gofc(n, .5)
+clopperL <- clopper_temp[1:(n+1)]
+clopperU <- clopper_temp[(n+2):(2*n+2)]
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+ac_temp <- ac_gofc(n, .5)
+acL <- ac_temp[1:(n+1)]
+acU <- ac_temp[(n+2):(2*n+2)]
+acL2 <- ac_temp[(2*n+3):(3*n+3)]
+acU2 <- ac_temp[(3*n+4):(4*n+4)]
+score_temp <- score_gofc(n, .5)
+scoreL <- score_temp[1:(n+1)]
+scoreU <- score_temp[(n+2):(2*n+2)]
+scoreL2 <- score_temp[(2*n+3):(3*n+3)]
+scoreU2 <- score_temp[(3*n+4):(4*n+4)]
+jeff_temp <- jeff_gofc(n, .5)
+jeffL <- jeff_temp[1:(n+1)]
+jeffU <- jeff_temp[(n+2):(2*n+2)]
+ms_temp <- mod_score_gofc(n, .5)
+msL <- ms_temp[1:(n+1)]
+msU <- ms_temp[(n+2):(2*n+2)]
+mj_temp <- mod_jeff_gofc(n, .5)
+mjL <- mj_temp[1:(n+1)]
+mjU <- mj_temp[(n+2):(2*n+2)]
+zl_temp <- zl_gofc(n, .5)
+zlL <- zl_temp[1:(n+1)]
+zlU <- zl_temp[(n+2):(2*n+2)]
+zlL2 <- zl_temp[(2*n+3):(3*n+3)]
+zlU2 <- zl_temp[(3*n+4):(4*n+4)]
+exact_temp <- exact_gofc(n, .5)
+exactL <- exact_temp[1:(n+1)]
+exactU <- exact_temp[(n+2):(2*n+2)]
+for (i in 1:len) cloppercp[i] <- cp(n,points[i],clopperL,clopperU,p_gofc_200_3[[i]])
+for (i in 1:len) clopperel[i] <- el(n,points[i],clopperL,clopperU,p_gofc_200_3[[i]])
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU,p_gofc_200_3[[i]])
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU,p_gofc_200_3[[i]])
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2,p_gofc_200_3[[i]])
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2,p_gofc_200_3[[i]])
+for (i in 1:len) accp[i] <- cp(n,points[i],acL,acU,p_gofc_200_3[[i]])
+for (i in 1:len) acel[i] <- el(n,points[i],acL,acU,p_gofc_200_3[[i]])
+for (i in 1:len) ac2cp[i] <- cp(n,points[i],acL2,acU2,p_gofc_200_3[[i]])
+for (i in 1:len) ac2el[i] <- el(n,points[i],acL2,acU2,p_gofc_200_3[[i]])
+for (i in 1:len) scp[i] <- cp(n,points[i],scoreL,scoreU,p_gofc_200_3[[i]])
+for (i in 1:len) sel[i] <- el(n,points[i],scoreL,scoreU,p_gofc_200_3[[i]])
+for (i in 1:len) s2cp[i] <- cp(n,points[i],scoreL2,scoreU2,p_gofc_200_3[[i]])
+for (i in 1:len) s2el[i] <- el(n,points[i],scoreL2,scoreU2,p_gofc_200_3[[i]])
+for (i in 1:len) mscp[i] <- cp(n,points[i],msL,msU,p_gofc_200_3[[i]])
+for (i in 1:len) msel[i] <- el(n,points[i],msL,msU,p_gofc_200_3[[i]])
+for (i in 1:len) mjcp[i] <- cp(n,points[i],mjL,mjU,p_gofc_200_3[[i]])
+for (i in 1:len) mjel[i] <- el(n,points[i],mjL,mjU,p_gofc_200_3[[i]])
+for (i in 1:len) zlcp[i] <- cp(n,points[i],zlL,zlU,p_gofc_200_3[[i]])
+for (i in 1:len) zlel[i] <- el(n,points[i],zlL,zlU,p_gofc_200_3[[i]])
+for (i in 1:len) zl2cp[i] <- cp(n,points[i],zlL2,zlU2,p_gofc_200_3[[i]])
+for (i in 1:len) zl2el[i] <- el(n,points[i],zlL2,zlU2,p_gofc_200_3[[i]])
+for (i in 1:len) jeffcp[i] <- cp(n,points[i],jeffL,jeffU,p_gofc_200_3[[i]])
+for (i in 1:len) jeffel[i] <- el(n,points[i],jeffL,jeffU,p_gofc_200_3[[i]])
+for (i in 1:len) exactcp[i] <- cp(n,points[i],exactL,exactU,p_gofc_200_3[[i]])
+for (i in 1:len) exactel[i] <- el(n,points[i],exactL,exactU,p_gofc_200_3[[i]])
+n200cloppercp3 <- cloppercp
+n200clopperel3 <- clopperel
+n200wcp3 <- wcp
+n200wel3 <- wel
+n200w2cp3 <- w2cp
+n200w2el3 <- w2el
+n200accp3 <- accp
+n200acel3 <- acel
+n200ac2cp3 <- ac2cp
+n200ac2el3 <- ac2el
+n200scp3 <- scp
+n200sel3 <- sel
+n200s2cp3 <- s2cp
+n200s2el3 <- s2el
+n200mscp3 <- mscp
+n200msel3 <- msel
+n200zlcp3 <- zlcp
+n200zlel3 <- zlel
+n200zl2cp3 <- zl2cp
+n200zl2el3 <- zl2el
+n200jeffcp3 <- jeffcp
+n200jeffel3 <- jeffel
+n200mjcp3 <- mjcp
+n200mjel3 <- mjel
+n200jeffcp3 <- jeffcp
+n200jeffel3 <-  jeffel
+n200exactcp3 <- exactcp
+n200exactel3 <- exactel
+a <- .4
+clopper_temp <- clopper_gofc(n, .5)
+clopperL <- clopper_temp[1:(n+1)]
+clopperU <- clopper_temp[(n+2):(2*n+2)]
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+ac_temp <- ac_gofc(n, .5)
+acL <- ac_temp[1:(n+1)]
+acU <- ac_temp[(n+2):(2*n+2)]
+acL2 <- ac_temp[(2*n+3):(3*n+3)]
+acU2 <- ac_temp[(3*n+4):(4*n+4)]
+score_temp <- score_gofc(n, .5)
+scoreL <- score_temp[1:(n+1)]
+scoreU <- score_temp[(n+2):(2*n+2)]
+scoreL2 <- score_temp[(2*n+3):(3*n+3)]
+scoreU2 <- score_temp[(3*n+4):(4*n+4)]
+jeff_temp <- jeff_gofc(n, .5)
+jeffL <- jeff_temp[1:(n+1)]
+jeffU <- jeff_temp[(n+2):(2*n+2)]
+ms_temp <- mod_score_gofc(n, .5)
+msL <- ms_temp[1:(n+1)]
+msU <- ms_temp[(n+2):(2*n+2)]
+mj_temp <- mod_jeff_gofc(n, .5)
+mjL <- mj_temp[1:(n+1)]
+mjU <- mj_temp[(n+2):(2*n+2)]
+zl_temp <- zl_gofc(n, .5)
+zlL <- zl_temp[1:(n+1)]
+zlU <- zl_temp[(n+2):(2*n+2)]
+zlL2 <- zl_temp[(2*n+3):(3*n+3)]
+zlU2 <- zl_temp[(3*n+4):(4*n+4)]
+exact_temp <- exact_gofc(n, .5)
+exactL <- exact_temp[1:(n+1)]
+exactU <- exact_temp[(n+2):(2*n+2)]
+for (i in 1:len) cloppercp[i] <- cp(n,points[i],clopperL,clopperU,p_gofc_200_4[[i]])
+for (i in 1:len) clopperel[i] <- el(n,points[i],clopperL,clopperU,p_gofc_200_4[[i]])
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU,p_gofc_200_4[[i]])
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU,p_gofc_200_4[[i]])
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2,p_gofc_200_4[[i]])
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2,p_gofc_200_4[[i]])
+for (i in 1:len) accp[i] <- cp(n,points[i],acL,acU,p_gofc_200_4[[i]])
+for (i in 1:len) acel[i] <- el(n,points[i],acL,acU,p_gofc_200_4[[i]])
+for (i in 1:len) ac2cp[i] <- cp(n,points[i],acL2,acU2,p_gofc_200_4[[i]])
+for (i in 1:len) ac2el[i] <- el(n,points[i],acL2,acU2,p_gofc_200_4[[i]])
+for (i in 1:len) scp[i] <- cp(n,points[i],scoreL,scoreU,p_gofc_200_4[[i]])
+for (i in 1:len) sel[i] <- el(n,points[i],scoreL,scoreU,p_gofc_200_4[[i]])
+for (i in 1:len) s2cp[i] <- cp(n,points[i],scoreL2,scoreU2,p_gofc_200_4[[i]])
+for (i in 1:len) s2el[i] <- el(n,points[i],scoreL2,scoreU2,p_gofc_200_4[[i]])
+for (i in 1:len) mscp[i] <- cp(n,points[i],msL,msU,p_gofc_200_4[[i]])
+for (i in 1:len) msel[i] <- el(n,points[i],msL,msU,p_gofc_200_4[[i]])
+for (i in 1:len) mjcp[i] <- cp(n,points[i],mjL,mjU,p_gofc_200_4[[i]])
+for (i in 1:len) mjel[i] <- el(n,points[i],mjL,mjU,p_gofc_200_4[[i]])
+for (i in 1:len) zlcp[i] <- cp(n,points[i],zlL,zlU,p_gofc_200_4[[i]])
+for (i in 1:len) zlel[i] <- el(n,points[i],zlL,zlU,p_gofc_200_4[[i]])
+for (i in 1:len) zl2cp[i] <- cp(n,points[i],zlL2,zlU2,p_gofc_200_4[[i]])
+for (i in 1:len) zl2el[i] <- el(n,points[i],zlL2,zlU2,p_gofc_200_4[[i]])
+for (i in 1:len) jeffcp[i] <- cp(n,points[i],jeffL,jeffU,p_gofc_200_4[[i]])
+for (i in 1:len) jeffel[i] <- el(n,points[i],jeffL,jeffU,p_gofc_200_4[[i]])
+for (i in 1:len) exactcp[i] <- cp(n,points[i],exactL,exactU,p_gofc_200_4[[i]])
+for (i in 1:len) exactel[i] <- el(n,points[i],exactL,exactU,p_gofc_200_4[[i]])
+n200cloppercp4 <- cloppercp
+n200clopperel4 <- clopperel
+n200wcp4 <- wcp
+n200wel4 <- wel
+n200w2cp4 <- w2cp
+n200w2el4 <- w2el
+n200accp4 <- accp
+n200acel4 <- acel
+n200ac2cp4 <- ac2cp
+n200ac2el4 <- ac2el
+n200scp4 <- scp
+n200sel4 <- sel
+n200s2cp4 <- s2cp
+n200s2el4 <- s2el
+n200mscp4 <- mscp
+n200msel4 <- msel
+n200zlcp4 <- zlcp
+n200zlel4 <- zlel
+n200zl2cp4 <- zl2cp
+n200zl2el4 <- zl2el
+n200jeffcp4 <- jeffcp
+n200jeffel4 <- jeffel
+n200mjcp4 <- mjcp
+n200mjel4 <- mjel
+n200jeffcp4 <- jeffcp
+n200jeffel4 <-  jeffel
+n200exactcp4 <- exactcp
+n200exactel4 <- exactel
+plot(points,ac2cp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,scp,type="l",lty=2,col="red")
+plot(points,n100accp2,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+plot(points,n100accp2,xlab="probability",ylab="CP",ylim=c(.8,1),type="l",lty=1,col="blue")
+plot(points,n100accp2,xlab="probability",ylab="CP",ylim=c(.5,1),type="l",lty=1,col="blue")
+plot(points,n100accp2,xlab="probability",ylab="CP",ylim=c(.7,1),type="l",lty=1,col="blue")
+lines(points,n100scp2,type="l",lty=2,col="red")
+lines(points,n100exactcp2,type="l",lty=2,col="red")
+plot(points,n100exactcp2,xlab="probability",ylab="CP",ylim=c(.95,1),type="l",lty=1,col="blue")
+plot(points,n100jeffcp2,xlab="probability",ylab="CP",ylim=c(.7,1),type="l",lty=1,col="blue")
+plot(points,n100zlcp2,xlab="probability",ylab="CP",ylim=c(.7,1),type="l",lty=1,col="blue")
+plot(points,n100cloppercp2,xlab="probability",ylab="CP",ylim=c(.7,1),type="l",lty=1,col="blue")
+plot(points,n100waldcp2,xlab="probability",ylab="CP",ylim=c(.7,1),type="l",lty=1,col="blue")
+plot(points,n100wcp2,xlab="probability",ylab="CP",ylim=c(.7,1),type="l",lty=1,col="blue")

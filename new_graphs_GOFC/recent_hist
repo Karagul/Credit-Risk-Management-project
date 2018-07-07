@@ -1,0 +1,512 @@
+u_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="clopper-pearson")$CI[2]
+center[i] <- 0.5*(u_temp[i]+l_temp[i])
+pt[i] <- p_calc(cen[i])
+f <- function(m) {pnorm(pt[i] + a*m)*dnorm(m)}
+g <- function(m) {z * sqrt(((pnorm(pt[i] + a*m) * (1 - pnorm(pt[i] + a*m)) + 0.25 * z2/n)/n)/(1 + z2/n))*dnorm(m)}
+c <- integrate(f,-Inf,Inf)$value   ## center of interval
+w <- integrate(g,-Inf,Inf)$value
+L[i] <- c - w
+U[i] <- c + w
+}
+L[which(L<0)] <- 0
+U[which(U>1)] <- 1
+return(c(L,U))
+}
+test_scp2<-rep(0,len)
+test_sel<-rep(0,len)
+test_s_temp <- test_score_gofc(n, .5)
+test_sL <- test_s_temp[1:(n+1)]
+test_sU <- test_s_temp[(n+2):(2*n+2)]
+for (i in 1:len) test_scp2[i] <- cp(n,points[i],test_sL,test_sU)
+warnings()
+n
+binomCI(0,100,conf.level=conf.level,method="clopper-pearson")
+binomCI(0,100,conf.level=.95,method="clopper-pearson")
+binomCI(1,100,conf.level=.95,method="clopper-pearson")
+plot(points,ac2cp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+plot(points,test_scp2,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+?binomCI
+test_score_gofc <- function(n,p,conf.level=.95){
+alpha <- (1-conf.level)/2
+z <- qnorm(1-alpha)
+z2 <- z*z
+x <- 0:n
+cen<-x/n
+cen[1]<-.0001
+cen[n+1]<-.9999
+center <- l_temp <- u_temp <- L <- U <- rep(0,n+1)
+for (i in (x+1)) {
+l_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[1]
+u_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[2]
+center[i] <- 0.5*(u_temp[i]+l_temp[i])
+pt[i] <- p_calc(cen[i])
+f <- function(m) {pnorm(pt[i] + a*m)*dnorm(m)}
+g <- function(m) {z * sqrt(((pnorm(pt[i] + a*m) * (1 - pnorm(pt[i] + a*m)) + 0.25 * z2/n)/n)/(1 + z2/n))*dnorm(m)}
+c <- integrate(f,-Inf,Inf)$value   ## center of interval
+w <- integrate(g,-Inf,Inf)$value
+L[i] <- c - w
+U[i] <- c + w
+}
+L[which(L<0)] <- 0
+U[which(U>1)] <- 1
+return(c(L,U))
+}
+test_scp2<-rep(0,len)
+test_sel<-rep(0,len)
+test_s_temp <- test_score_gofc(n, .5)
+test_sL <- test_s_temp[1:(n+1)]
+test_sU <- test_s_temp[(n+2):(2*n+2)]
+for (i in 1:len) test_scp2[i] <- cp(n,points[i],test_sL,test_sU)
+plot(points,test_scp2,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+library(MKmisc)
+library(binom)
+wcp<-rep(0,len)
+wel<-rep(0,len)
+w2cp<-rep(0,len)
+w2el<-rep(0,len)
+w_temp <- w_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+source("C:\\Users\\gilbert\\Desktop\\conf_int_GOFC.r")
+w_temp <- w_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU)
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU)
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2)
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2)
+n
+plot(points,ac2cp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+plot(points,ac2cp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,scp,type="l",lty=2,col="red")
+plot(points,wcp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,w2cp,type="l",lty=2,col="red")
+test_score_gofc <- function(n,p,conf.level=.95){
+alpha <- (1-conf.level)/2
+z <- qnorm(1-alpha)
+z2 <- z*z
+x <- 0:n
+cen<-x/n
+cen[1]<-.0001
+cen[n+1]<-.9999
+center <- l_temp <- u_temp <- L <- U <- rep(0,n+1)
+for (i in (x+1)) {
+l_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[1]
+u_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[2]
+center[i] <- 0.5*(u_temp[i]+l_temp[i])
+pt[i] <- p_calc(cen[i])
+f <- function(m) {pnorm(pt[i] + a*m)*dnorm(m)}
+g <- function(m) {z * sqrt(((pnorm(pt[i] + a*m) * (1 - pnorm(pt[i] + a*m)) + 0.25 * z2/n)/n)/(1 + z2/n))*dnorm(m)}
+c <- integrate(f,-Inf,Inf)$value   ## center of interval
+w <- integrate(g,-Inf,Inf)$value
+L[i] <- c - w
+U[i] <- c + w
+}
+L[which(L<0)] <- 0
+U[which(U>1)] <- 1
+return(c(L,U))
+}
+test_scp2<-rep(0,len)
+test_sel<-rep(0,len)
+test_s_temp <- test_score_gofc(n, .5)
+test_sL <- test_s_temp[1:(n+1)]
+test_sU <- test_s_temp[(n+2):(2*n+2)]
+for (i in 1:len) test_scp2[i] <- cp(n,points[i],test_sL,test_sU)
+plot(points,wcp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,w2cp,type="l",lty=2,col="red")
+lines(points,test_scp2,type="l",lty=2,col="red")
+plot(points,ac2cp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,scp,type="l",lty=2,col="red")
+lines(points,zl2cp,type="l",lty=3,col="cyan")
+binomCI
+zl
+zl(1,10,10,.95)[1]
+zl(1,10,10)[1]
+warnings()
+source("C:\\Users\\gilbert\\Desktop\\confint_compare.r")
+zl(1,10,10)[1]
+zl(1,10,10,.95)[1]
+test_score_gofc <- function(n,p,conf.level=.95){
+alpha <- (1-conf.level)/2
+z <- qnorm(1-alpha)
+z2 <- z*z
+x <- 0:n
+cen<-x/n
+cen[1]<-.0001
+cen[n+1]<-.9999
+center <- l_temp <- u_temp <- L <- U <- rep(0,n+1)
+for (i in (x+1)) {
+#l_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[1]
+#u_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[2]
+l_temp[i] <- zl(x[i],n,n,conf_lev=conf.level)[1]
+u_temp[i] <- zl(x[i],n,conf.level=conf.level,method="wald")[2]
+center[i] <- 0.5*(u_temp[i]+l_temp[i])
+pt[i] <- p_calc(cen[i])
+f <- function(m) {pnorm(pt[i] + a*m)*dnorm(m)}
+g <- function(m) {z * sqrt(((pnorm(pt[i] + a*m) * (1 - pnorm(pt[i] + a*m)) + 0.25 * z2/n)/n)/(1 + z2/n))*dnorm(m)}
+c <- integrate(f,-Inf,Inf)$value   ## center of interval
+w <- integrate(g,-Inf,Inf)$value
+L[i] <- c - w
+U[i] <- c + w
+}
+L[which(L<0)] <- 0
+U[which(U>1)] <- 1
+return(c(L,U))
+}
+test_s_temp <- test_score_gofc(n, .5)
+test_sL <- test_s_temp[1:(n+1)]
+test_sU <- test_s_temp[(n+2):(2*n+2)]
+for (i in 1:len) test_scp2[i] <- cp(n,points[i],test_sL,test_sU)
+test_score_gofc <- function(n,p,conf.level=.95){
+alpha <- (1-conf.level)/2
+z <- qnorm(1-alpha)
+z2 <- z*z
+x <- 0:n
+cen<-x/n
+cen[1]<-.0001
+cen[n+1]<-.9999
+center <- l_temp <- u_temp <- L <- U <- rep(0,n+1)
+for (i in (x+1)) {
+#l_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[1]
+#u_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[2]
+l_temp[i] <- zl(x[i],n,n,conf_lev=conf.level)[1]
+u_temp[i] <- zl(x[i],n,conf.level=conf.level)[2]
+center[i] <- 0.5*(u_temp[i]+l_temp[i])
+pt[i] <- p_calc(cen[i])
+f <- function(m) {pnorm(pt[i] + a*m)*dnorm(m)}
+g <- function(m) {z * sqrt(((pnorm(pt[i] + a*m) * (1 - pnorm(pt[i] + a*m)) + 0.25 * z2/n)/n)/(1 + z2/n))*dnorm(m)}
+c <- integrate(f,-Inf,Inf)$value   ## center of interval
+w <- integrate(g,-Inf,Inf)$value
+L[i] <- c - w
+U[i] <- c + w
+}
+L[which(L<0)] <- 0
+U[which(U>1)] <- 1
+return(c(L,U))
+}
+test_s_temp <- test_score_gofc(n, .5)
+test_sL <- test_s_temp[1:(n+1)]
+test_sU <- test_s_temp[(n+2):(2*n+2)]
+for (i in 1:len) test_scp2[i] <- cp(n,points[i],test_sL,test_sU)
+test_score_gofc <- function(n,p,conf.level=.95){
+alpha <- (1-conf.level)/2
+z <- qnorm(1-alpha)
+z2 <- z*z
+x <- 0:n
+cen<-x/n
+cen[1]<-.0001
+cen[n+1]<-.9999
+center <- l_temp <- u_temp <- L <- U <- rep(0,n+1)
+for (i in (x+1)) {
+#l_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[1]
+#u_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[2]
+l_temp[i] <- zl(x[i],n,n,conf_lev=conf.level)[1]
+u_temp[i] <- zl(x[i],n,conf_lev=conf.level)[2]
+center[i] <- 0.5*(u_temp[i]+l_temp[i])
+pt[i] <- p_calc(cen[i])
+f <- function(m) {pnorm(pt[i] + a*m)*dnorm(m)}
+g <- function(m) {z * sqrt(((pnorm(pt[i] + a*m) * (1 - pnorm(pt[i] + a*m)) + 0.25 * z2/n)/n)/(1 + z2/n))*dnorm(m)}
+c <- integrate(f,-Inf,Inf)$value   ## center of interval
+w <- integrate(g,-Inf,Inf)$value
+L[i] <- c - w
+U[i] <- c + w
+}
+L[which(L<0)] <- 0
+U[which(U>1)] <- 1
+return(c(L,U))
+}
+test_scp2<-rep(0,len)
+test_sel<-rep(0,len)
+test_s_temp <- test_score_gofc(n, .5)
+test_sL <- test_s_temp[1:(n+1)]
+test_sU <- test_s_temp[(n+2):(2*n+2)]
+for (i in 1:len) test_scp2[i] <- cp(n,points[i],test_sL,test_sU)
+test_score_gofc <- function(n,p,conf.level=.95){
+alpha <- (1-conf.level)/2
+z <- qnorm(1-alpha)
+z2 <- z*z
+x <- 0:n
+cen<-x/n
+cen[1]<-.0001
+cen[n+1]<-.9999
+center <- l_temp <- u_temp <- L <- U <- rep(0,n+1)
+for (i in (x+1)) {
+#l_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[1]
+#u_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[2]
+l_temp[i] <- zl(x[i],n,n,conf_lev=conf.level)[1]
+u_temp[i] <- zl(x[i],n,n,conf_lev=conf.level)[2]
+center[i] <- 0.5*(u_temp[i]+l_temp[i])
+pt[i] <- p_calc(cen[i])
+f <- function(m) {pnorm(pt[i] + a*m)*dnorm(m)}
+g <- function(m) {z * sqrt(((pnorm(pt[i] + a*m) * (1 - pnorm(pt[i] + a*m)) + 0.25 * z2/n)/n)/(1 + z2/n))*dnorm(m)}
+c <- integrate(f,-Inf,Inf)$value   ## center of interval
+w <- integrate(g,-Inf,Inf)$value
+L[i] <- c - w
+U[i] <- c + w
+}
+L[which(L<0)] <- 0
+U[which(U>1)] <- 1
+return(c(L,U))
+}
+test_scp2<-rep(0,len)
+test_sel<-rep(0,len)
+test_s_temp <- test_score_gofc(n, .5)
+test_sL <- test_s_temp[1:(n+1)]
+test_sU <- test_s_temp[(n+2):(2*n+2)]
+for (i in 1:len) test_scp2[i] <- cp(n,points[i],test_sL,test_sU)
+plot(points,scp2,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+test_score_gofc <- function(n,p,conf.level=.95){
+alpha <- (1-conf.level)/2
+z <- qnorm(1-alpha)
+z2 <- z*z
+x <- 0:n
+cen<-x/n
+cen[1]<-.0001
+cen[n+1]<-.9999
+center <- l_temp <- u_temp <- L <- U <- rep(0,n+1)
+for (i in (x+1)) {
+#l_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[1]
+#u_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[2]
+l_temp[i] <- zl(x[i],n,n,conf_lev=conf.level)[1]
+u_temp[i] <- zl(x[i],n,n,conf_lev=conf.level)[2]
+center[i] <- 0.5*(u_temp[i]+l_temp[i])
+pt[i] <- p_calc(center[i])
+f <- function(m) {pnorm(pt[i] + a*m)*dnorm(m)}
+g <- function(m) {z * sqrt(((pnorm(pt[i] + a*m) * (1 - pnorm(pt[i] + a*m)) + 0.25 * z2/n)/n)/(1 + z2/n))*dnorm(m)}
+c <- integrate(f,-Inf,Inf)$value   ## center of interval
+w <- integrate(g,-Inf,Inf)$value
+L[i] <- c - w
+U[i] <- c + w
+}
+L[which(L<0)] <- 0
+U[which(U>1)] <- 1
+return(c(L,U))
+}
+test_scp2<-rep(0,len)
+test_sel<-rep(0,len)
+test_s_temp <- test_score_gofc(n, .5)
+test_sL <- test_s_temp[1:(n+1)]
+test_sU <- test_s_temp[(n+2):(2*n+2)]
+for (i in 1:len) test_scp2[i] <- cp(n,points[i],test_sL,test_sU)
+plot(points,test_scp2,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+test_score_gofc <- function(n,p,conf.level=.95){
+alpha <- (1-conf.level)/2
+z <- qnorm(1-alpha)
+z2 <- z*z
+x <- 0:n
+cen<-x/n
+cen[1]<-.0001
+cen[n+1]<-.9999
+center <- l_temp <- u_temp <- L <- U <- rep(0,n+1)
+for (i in (x+1)) {
+l_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[1]
+u_temp[i] <- binomCI(x[i],n,conf.level=conf.level,method="wald")$CI[2]
+#l_temp[i] <- zl(x[i],n,n,conf_lev=conf.level)[1]
+#u_temp[i] <- zl(x[i],n,n,conf_lev=conf.level)[2]
+center[i] <- 0.5*(u_temp[i]+l_temp[i])
+pt[i] <- p_calc(center[i])
+f <- function(m) {pnorm(pt[i] + a*m)*dnorm(m)}
+g <- function(m) {z * sqrt(((pnorm(pt[i] + a*m) * (1 - pnorm(pt[i] + a*m)) + 0.25 * z2/n)/n)/(1 + z2/n))*dnorm(m)}
+c <- integrate(f,-Inf,Inf)$value   ## center of interval
+w <- integrate(g,-Inf,Inf)$value
+L[i] <- c - w
+U[i] <- c + w
+}
+L[which(L<0)] <- 0
+U[which(U>1)] <- 1
+return(c(L,U))
+}
+test_scp2<-rep(0,len)
+test_sel<-rep(0,len)
+test_s_temp <- test_score_gofc(n, .5)
+test_sL <- test_s_temp[1:(n+1)]
+test_sU <- test_s_temp[(n+2):(2*n+2)]
+for (i in 1:len) test_scp2[i] <- cp(n,points[i],test_sL,test_sU)
+plot(points,test_scp2,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,wcp,type="l",lty=2,col="red")
+lines(points,w2cp,type="l",lty=3,col="green")
+plot(points,test_scp2,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,w2cp,type="l",lty=2,col="red")
+load("C:\\Users\\gilbert\\Desktop\\new_graphs_GOFC\\recent")
+objects()
+plot(points,ac2cp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,scp,type="l",lty=2,col="red")
+plot(points,n100cloppercp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,n50cloppercp,type="l",lty=2,col="red")
+lines(points,n200cloppercp,type="l",lty=3,col="green")
+abline(h=.95)
+title("Coverage Probability, Clopper-Pearson")
+mtext("correlation = 0.2")
+legend(x=.2,y=.925,c("n=50","n=100","n=200"),cex=.75,col=c("red","blue","green"),lty=c(2,1,3))
+plot(points,ac2el,xlab="probability",ylab="EL",ylim=c(0.04,.15),type="l",lty=1,col="blue")
+lines(points,sel,type="l",lty=2,col="red")
+plot(points,n100clopperel,xlab="probability",ylab="EL",ylim=c(0.04,.15),type="l",lty=1,col="blue")
+plot(points,n100clopperel,xlab="probability",ylab="EL",ylim=c(0.04,.35),type="l",lty=1,col="blue")
+plot(points,n100clopperel,xlab="probability",ylab="EL",ylim=c(0.04,.25),type="l",lty=1,col="blue")
+lines(points,n50clopperel,type="l",lty=2,col="red")
+lines(points,n200clopperel,type="l",lty=3,col="green")
+title("Expected Length, Clopper-Pearson Method")
+mtext("correlation = 0.2")
+legend(x=.2,y=.075,c("n=50","n=100","n=200"),cex=.75,col=c("red","blue","green"),lty=c(2,1,3))
+plot(points,ac2cp,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+plot(points,n100cloppercp1,xlab="probability",ylab="CP",ylim=c(.9,1),type="l",lty=1,col="blue")
+lines(points,n100cloppercp,type="l",lty=2,col="red")
+lines(points,n100cloppercp4,type="l",lty=3,col="green")
+plot(points,n100cloppercp1,xlab="probability",ylab="CP",ylim=c(.75,1),type="l",lty=1,col="blue")
+lines(points,n100cloppercp,type="l",lty=2,col="red")
+lines(points,n100cloppercp4,type="l",lty=3,col="green")
+abline(h=.95)
+title("Coverage Probability, Clopper-Pearson, n=100")
+mtext("correlation = 0.1,0.2,0.4")
+legend(x=.2,y=.775,c("a=0.1","a=0.2","a=0.4"),cex=.75,col=c("blue","red","green"),lty=c(1,2,3))
+legend(x=.25,y=.8,c("a=0.1","a=0.2","a=0.4"),cex=.75,col=c("blue","red","green"),lty=c(1,2,3))
+legend(x=.22,y=.8,c("a=0.1","a=0.2","a=0.4"),cex=.75,col=c("blue","red","green"),lty=c(1,2,3))
+plot(points,n100cloppercp1,xlab="probability",ylab="CP",ylim=c(.75,1),type="l",lty=1,col="blue")
+lines(points,n100cloppercp,type="l",lty=2,col="red")
+lines(points,n100cloppercp4,type="l",lty=3,col="green")
+abline(h=.95)
+title("Coverage Probability, Clopper-Pearson, n=100")
+mtext("correlation = 0.1,0.2,0.4")
+legend(x=.2,y=.775,c("a=0.1","a=0.2","a=0.4"),cex=.75,col=c("blue","red","green"),lty=c(1,2,3)legend(x=.22,y=.8,c("a=0.1","a=0.2","a=0.4"),cex=.75,col=c("blue","red","green"),lty=c(1,2,3)))
+legend(x=.22,y=.8,c("a=0.1","a=0.2","a=0.4"),cex=.75,col=c("blue","red","green"),lty=c(1,2,3))
+plot(points,ac2el,xlab="probability",ylab="EL",ylim=c(0.04,.15),type="l",lty=1,col="blue")
+plot(points,n100clopperel1,xlab="probability",ylab="EL",ylim=c(0.04,.15),type="l",lty=1,col="blue")
+plot(points,n100clopperel1,xlab="probability",ylab="EL",ylim=c(0.04,.25),type="l",lty=1,col="blue")
+plot(points,n100clopperel1,xlab="probability",ylab="EL",ylim=c(0.04,.2),type="l",lty=1,col="blue")
+lines(points,n100clopperel,type="l",lty=2,col="red")
+lines(points,n100clopperel4,type="l",lty=3,col="green")
+title("Expected Length, Clopper-Pearson Method, n=100")
+mtext("correlation = 0.1,0.2,0.4")
+legend(x=.2,y=.075,c("a=0.1","a=0.2","a=0.4"),cex=.75,col=c("blue","red","green"),lty=c(1,2,3))
+library(MKmisc)
+library(binom)
+a <- .1
+n <- 100
+wcp<-rep(0,len)
+wel<-rep(0,len)
+w2cp<-rep(0,len)
+w2el<-rep(0,len)
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU)
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU)
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2)
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2)
+n100wcp1 <- wcp
+n100wel1 <- wel
+n100w2cp1 <- w2cp
+n100w2el1 <- w2el
+a <- .4
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU)
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU)
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2)
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2)
+n100wcp4 <- wcp
+n100wel4 <- wel
+n100w2cp4 <- w2cp
+n100w2el4 <- w2el
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU)
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU)
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2)
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2)
+n200wcp4 <- wcp
+n200wel4 <- wel
+n200w2cp4 <- w2cp
+n200w2el4 <- w2el
+a <- .2
+n <- 200
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU)
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU)
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2)
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2)
+n200wcp <- wcp
+n200wel <- wel
+n200w2cp <- w2cp
+n200w2el <- w2el
+a <- .1
+n <- 200
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU)
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU)
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2)
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2)
+n200wcp1 <- wcp
+n200wel1 <- wel
+n200w2cp1 <- w2cp
+n200w2el1 <- w2el
+objects()
+a <- .1
+n <- 50
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU)
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU)
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2)
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2)
+n50wcp1 <- wcp
+n50wel1 <- wel
+n50w2cp1 <- w2cp
+n50w2el1 <- w2el
+a <- .2
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU)
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU)
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2)
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2)
+n50wcp <- wcp
+n50wel <- wel
+n50w2cp <- w2cp
+n50w2el <- w2el
+a <- .4
+w_temp <- wald_gofc(n, .5)
+wL <- w_temp[1:(n+1)]
+wU <- w_temp[(n+2):(2*n+2)]
+wL2 <- w_temp[(2*n+3):(3*n+3)]
+wU2 <- w_temp[(3*n+4):(4*n+4)]
+for (i in 1:len) wcp[i] <- cp(n,points[i],wL,wU)
+for (i in 1:len) wel[i] <- el(n,points[i],wL,wU)
+for (i in 1:len) w2cp[i] <- cp(n,points[i],wL2,wU2)
+for (i in 1:len) w2el[i] <- el(n,points[i],wL2,wU2)
+n50wcp4 <- wcp
+n50wel4 <- wel
+n50w2cp4 <- w2cp
+n50w2el4 <- w2el
+objects()

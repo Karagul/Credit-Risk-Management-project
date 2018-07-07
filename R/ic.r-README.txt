@@ -1,0 +1,63 @@
+ic.r SUMMARY
+-------------------------------
+
+ic.r implements the implied copula of Hull and White(2006). A vector of hazard rates and a vector of tranche values is defined in the script.  From these a matrix, V, of contract values for each tranche and hazard rate can be calculated. Post-multiplying this matrix by a vector of probabilities gives the equations that should be equal to zero in the Hull and White paper.  This vector is squared and added to the smoothing function in the function fm below.  This is the objective function.  Constraints are defined so the probabities are greater than or equal to 0 and sum to 1.  
+
+the main function to call is mopt(init), where init is an initial vector of probabilites that the optimization routine begins with.
+
+Note:  package "alabama" must be loaded to run the optimization function auglag.
+Note: cop_price.r should be loaded first.
+
+
+
+
+
+
+
+
+GLOSSARY OF GLOBAL VARIABLES AND FUNCTIONS IN ic.r
+-------------------------------
+
+GLOBAL VARIABLES:
+
+lam:  vector of hazard rates defined from small (almost no chance of default) to large (prob. almost 1 of default).  The values are spaced so that the log values are equally spaced.
+
+tr:  vector of tranche attachement points
+
+tr_sp: vector of market spreads on tranches and index
+
+tr1_upfront: the market quote for upfront payment on the first tranche
+
+start: default vector of initial values for optimization function
+
+FUNCTIONS:
+
+pp: inputs number of defaults,k, hazard rate, lam, and time,t, and returns probability of k defaults by time t according to poisson process with rate lam
+
+nv: inputs tranche attachement points and returns a vector of remaining notional after each number of defaults, 0 through N_c.  (Uses function rn from cop_price.r)
+
+val:  inputs a vector of nominal values for each time t_i and a spread, q, and returns value of contract according to pricing formula
+
+en: takes hazard rate and tranche attach points and calculates the expected notional at each time t_i for the given tranche.  This is done by multiplying prob of each number of defaults by remaining notional given that number of defaults and then summing over number of defaults.
+
+Vcalc:  no inputs.  Calculates a matrix V, where V[i,j] is the contract value for tranche i under hazard rate j.  This is calculated by calling the functions above.
+
+Vsim:  same as Vcalc except V is calculated by simulating a Poisson process with each rate lambda (by calling Psim below).  A matrix of default probabilities for each time is multiplied by notional value vector for each tranche and tranche spread.  Since this function takes much longer to run it is used mainly as a check on Vcalc.
+
+Psim: input hazard rate and number of runs.  Simulates a Poisson process by simulating N_c interarrval times using exponential dist. with given hazard rate.  The cumulative sum of these times are calculated and sent to count2 (below) function to obtain number of defaults by each time t_i.  A matrix W containing the number of defaults by time t_i for each i is then updated based on the result.  This is repeated runs time.  The matrix W is divided by runs to give a probability of each of the number of defaults by time t_i.  W is returned.  
+
+fm: this is the function to minimize.  input is a vector and output is the sum of two terms.  the first, y, is the smoothing term that is analagous to the second derivative. The second, z, is the square of the value matrix V, matrix multiplied by the input vector.  The resulting vector should be the zero vector.  We square each element of z and sum.  Finally a constant c=.001 is multiplied by y, so fm returns z + c*y.  
+
+grad: input vector x.  This returns the gradient of fm evaluated at x.
+
+hin: the function defining the inequality contraints.  Each value of the probabiilty should be greater than 0.
+
+hin.jac: the jacobian of hin
+
+heq: function of equality constraints.  vector of probabilities should sum to 1.
+
+heq.jac: jacobian of heq.
+
+mopt:  main function to call.  inputs a starting value, init by default, and return vector of parameters that solve the minimization problem.  first Vcalc is called to calculate V, then the function auglag is called with appropriate parameters to solve minimization.
+
+
